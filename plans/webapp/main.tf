@@ -124,6 +124,15 @@ module "env_sg_rules_https" {
 	sg_id         = "${ module.env_sg.id }"
 }
 
+module "env_sg_rules_custom" {
+	source = "../../modules/sg_rules_sg"
+
+	source_sg_id  = "${ module.env_lb_sg.id }"
+    from_port     = "3000"
+    to_port       = "3000"
+	sg_id         = "${ module.env_sg.id }"
+}
+
 module "env_sg_rules_egress" {
 	source = "../../modules/sg_rules"
 
