@@ -1,0 +1,3 @@
+/plans/webapp/.terraform
+/plans/webapp/env/vars.tfvars
+/plans/webapp/files/user-data.sh
