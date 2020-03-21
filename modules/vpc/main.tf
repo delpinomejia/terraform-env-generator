@@ -67,3 +67,32 @@ resource "aws_route_table_association" "web-public-rt" {
   subnet_id = "${element(aws_subnet.public-subnet.*.id, count.index)}"
   route_table_id = "${aws_route_table.web-public-rt.id}"
 }
+
+# Define NAT Gateway
+resource "aws_eip" "nat" {
+vpc      = true
+}
+resource "aws_nat_gateway" "nat-gw" {
+  allocation_id = "${aws_eip.nat.id}"
+  subnet_id = "${element(aws_subnet.public-subnet.*.id, 0)}"
+  depends_on = [ aws_internet_gateway.gw ]
+}
+
+# Define VPC for NAT
+resource "aws_route_table" "web-private-rt" {
+    vpc_id = "${aws_vpc.env_vpc.id}"
+    route {
+      cidr_block = "0.0.0.0/0"
+      nat_gateway_id = "${aws_nat_gateway.nat-gw.id}"
+    }
+
+    tags = {
+    Name = "${ var.environment }-${ var.project_name }-RT-private"
+    }
+}
+# Terraform Training private routes
+resource "aws_route_table_association" "web-private-rt" {
+  count = "${length(var.private_subnet_cidr)}"
+  subnet_id = "${element(aws_subnet.private-subnet.*.id, count.index)}"
+  route_table_id = "${aws_route_table.web-private-rt.id}"
+}
