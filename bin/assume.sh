@@ -6,12 +6,12 @@ shift
 
 case $ASSUME_ENV in
 dev)
-	ASSUME_ARN="arn:aws:iam::908130151595:role/AWS-Deploy"
+	ASSUME_ARN="arn:aws:iam::xxxxx" # Add specific DEV ARN role here
 	TF_VAR_aws_account="development"
 	;;
 
 prod)
-	ASSUME_ARN="arn:aws:iam::xxxx"
+	ASSUME_ARN="arn:aws:iam::xxxx" # Add specific PROD ARN role here
 	TF_VAR_aws_account="production"
 	;;
 *)
