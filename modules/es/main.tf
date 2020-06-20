@@ -1,3 +1,7 @@
+data "aws_region" "current" {}
+
+data "aws_caller_identity" "current" {}
+
 resource "aws_elasticsearch_domain" "es" {
   domain_name = "${var.es_domain}"
   elasticsearch_version = "6.3"
