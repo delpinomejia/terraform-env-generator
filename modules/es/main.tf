@@ -15,7 +15,7 @@ resource "aws_elasticsearch_domain" "es" {
 
   ebs_options {
       ebs_enabled = true
-      volume_size = 10
+      volume_size = 20
   }
 
   access_policies = <<CONFIG
