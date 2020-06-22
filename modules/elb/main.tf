@@ -5,7 +5,7 @@ resource "aws_lb" "elb" {
   load_balancer_type = "${ var.lb_type }"
   security_groups    = ["${ var.lb_sg }"]
   subnets            = "${ var.lb_subnets }"
-  interval           = 90
+  #interval           = 90
   
   tags = {
     Name             = "${ var.name }"
@@ -33,7 +33,7 @@ resource "aws_lb_target_group" "target_group" {
   }
  
   health_check {
-    port                = 80
+    port                = 9200
     path                = "/"
     healthy_threshold   = 2
     unhealthy_threshold = 2
