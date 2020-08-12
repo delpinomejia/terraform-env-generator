@@ -12,8 +12,8 @@ provider "aws" {
 
 terraform {
 	backend "s3" {
-		bucket  = "tm-devops" 
-		key     = "plans/webapp/"
+		bucket  = "devops-projects-dpc" 
+		key     = "plans/"
 		region  = "us-west-2"
 		dynamodb_table = "terraform-lock"
 		encrypt = true
